@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louis Buitton - Maison de Couture</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3efe6;
+      --surface: #e7dfd3;
+      --surface-strong: #d3c7b7;
+      --text: #2a221b;
+      --muted: #6c5f53;
+      --accent: #9b8458;
+      --border: rgba(42,34,27,0.12);
+      --shadow: 0 24px 60px rgba(42,34,27,0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Georgia", "Times New Roman", serif;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.95), rgba(243,239,230,1) 45%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.44), transparent 45%),
+        radial-gradient(circle at 20% 15%, rgba(155,132,88,0.10), transparent 18%),
+        radial-gradient(circle at 80% 80%, rgba(42,34,27,0.06), transparent 15%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: grid;
+      gap: 10px;
+    }
+
+    .brand .name {
+      font-size: clamp(2rem, 3vw, 3.6rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .brand .tagline {
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 1px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      display: grid;
+      gap: 20px;
+      padding: 60px 0 40px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 5vw, 5.6rem);
+      margin: 0;
+      line-height: 0.98;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .button,
+    .button-secondary {
+      padding: 14px 26px;
+      border: 1px solid var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .button:hover,
+    .button-secondary:hover {
+      background: rgba(42,34,27,0.08);
+    }
+
+    .button {
+      background: var(--text);
+      color: #f8f3ec;
+    }
+
+    .button-secondary {
+      border-color: var(--muted);
+      color: var(--muted);
+    }
+
+    .feature-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(255,255,255,0.85));
+      pointer-events: none;
+    }
+
+    .feature-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-info {
+      padding: 24px;
+    }
+
+    .feature-info h2 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-info p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .price-tag {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .price {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .action-row button {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 48px 0 24px;
+      gap: 16px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.85rem;
+    }
+
+    .catalog {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(42,34,27,0.08);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body {
+      padding: 22px;
+    }
+
+    .product-body h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .product-body p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      min-height: 48px;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .product-meta .price {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .product-card button {
+      width: 100%;
+      border: 1px solid var(--text);
+      border-radius: 12px;
+      padding: 14px;
+      background: transparent;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .product-card button:hover {
+      background: rgba(42,34,27,0.08);
+      transform: translateY(-1px);
+    }
+
+    .cart-panel {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      width: min(100%, 360px);
+      box-shadow: var(--shadow);
+      height: fit-content;
+    }
+
+    .cart-panel h3 {
+      margin: 0 0 18px;
+      font-size: 1.35rem;
+    }
+
+    .cart-items {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+    }
+
+    .cart-item-info {
+      min-width: 0;
+    }
+
+    .cart-item-info h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .cart-item-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      gap: 10px;
+    }
+
+    .quantity {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.95rem;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .remove {
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    .cart-summary {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .cart-summary p {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .checkout {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      background: var(--text);
+      color: #f8f3ec;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .checkout:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .notice {
+      padding: 18px 24px;
+      margin-top: 36px;
+      border: 1px solid rgba(155,132,88,0.18);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      header,
+      .section-title,
+      .catalog {
+        gap: 16px;
+      }
+
+      .cart-panel {
+        position: static;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="brand">
+        <p class="tagline">Maison &amp; Atelier</p>
+        <h1 class="name">Louis Buitton</h1>
+      </div>
+      <nav>
+        <a href="#collection">Collection</a>
+        <a href="#cart">Cart</a>
+        <a href="#story">Story</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Heirloom tailoring for modern evenings.</h1>
+        <p>Discover a carefully curated selection of premium garments, each crafted from rich fabrics, cut for timeless confidence, and styled in neutral silhouettes that echo old-world luxury.</p>
+        <div class="hero-actions">
+          <a class="button" href="#collection">Shop the Collection</a>
+          <a class="button-secondary" href="#story">Our Heritage</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-title">
+      <h2>Featured Selections</h2>
+      <p>Elevated essentials, refined silhouettes.</p>
+    </section>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80" alt="Model wearing an ivory blazer over tailoring" />
+        <div class="feature-info">
+          <h2>The Blanc Blazer</h2>
+          <p>Italian linen blend tailored in a refined off-white finish, perfect for cultivated daywear or elegant evenings.</p>
+          <div class="price-tag">
+            <span class="price">$345</span>
+            <button class="button-secondary" onclick="scrollToCollection()">View</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Model wearing luxury knitwear" />
+        <div class="feature-info">
+          <h2>Chateau Cashmere</h2>
+          <p>Sumptuous cashmere knit in a soft taupe shade with structured shoulders and subtle, noble details.</p>
+          <div class="price-tag">
+            <span class="price">$395</span>
+            <button class="button-secondary" onclick="scrollToCollection()">View</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card">
+        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=80" alt="Model wearing a cream tailored coat" />
+        <div class="feature-info">
+          <h2>Majesty Coat</h2>
+          <p>Longline wool coat in antique cream, cut to drape with a distinguished silhouette and relaxed confidence.</p>
+          <div class="price-tag">
+            <span class="price">$520</span>
+            <button class="button-secondary" onclick="scrollToCollection()">View</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="notice">
+      <strong>Exclusive couture:</strong> every piece features a model image, premium craftsmanship, and styling inspired by traditional luxury.
+    </div>
+
+    <section id="collection" class="section-title">
+      <h2>Catalog</h2>
+      <p>Curated garments priced above $250.</p>
+    </section>
+
+    <div style="display:grid; gap:24px; grid-template-columns: 1fr minmax(320px, 360px); align-items:start;">
+      <div class="catalog">
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80" alt="Model wearing a tailored ivory jacket with trousers" />
+          <div class="product-body">
+            <h3>Ivory Tailored Jacket</h3>
+            <p>Structured silhouette with burnished horn buttons and crisp shoulder lines, crafted from a rich wool-linen mix.</p>
+            <div class="product-meta">
+              <span class="price">$275</span>
+              <button onclick="addToCart(0)">Add to Cart</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1200&q=80" alt="Model wearing luxurious knitwear in neutral tone" />
+          <div class="product-body">
+            <h3>Estate Cashmere Sweater</h3>
+            <p>Ultra-soft knit finished in a warm almond hue, detailed with a high collar and elegant ribbed hems.</p>
+            <div class="product-meta">
+              <span class="price">$320</span>
+              <button onclick="addToCart(1)">Add to Cart</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1495121605193-b116b5b9c5d6?auto=format&fit=crop&w=1200&q=80" alt="Model wearing a luxurious coat in neutral colors" />
+          <div class="product-body">
+            <h3>Regal Overcoat</h3>
+            <p>Longline silhouette in a refined gingerbread shade, trimmed with soft suede detailing and tailored to perfection.</p>
+            <div class="product-meta">
+              <span class="price">$540</span>
+              <button onclick="addToCart(2)">Add to Cart</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1520975919013-5295a7ce10a5?auto=format&fit=crop&w=1200&q=80" alt="Model wearing elegant tailored trousers set" />
+          <div class="product-body">
+            <h3>Gallery Trousers</h3>
+            <p>High-waist tailored trousers with a soft drape, cut from luxury suiting fabric with a subtle cream pinstripe.</p>
+            <div class="product-meta">
+              <span class="price">$260</span>
+              <button onclick="addToCart(3)">Add to Cart</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <aside id="cart" class="cart-panel">
+        <h3>Your Cart</h3>
+        <div class="cart-items" id="cartItems">
+          <p style="color: var(--muted);">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-summary">
+          <p><span>Subtotal</span><span id="subtotal">$0</span></p>
+          <p><span>Shipping</span><span>$25</span></p>
+          <p style="font-weight:700;"><span>Total</span><span id="total">$25</span></p>
+        </div>
+        <button class="checkout" id="checkoutButton" onclick="checkout()" disabled>Checkout</button>
+      </aside>
+    </div>
+
+    <section id="story" class="section-title">
+      <h2>Maison Story</h2>
+      <p>Inspired by timeless refinement and cultivated modern luxury.</p>
+    </section>
+
+    <p style="max-width:730px; color: var(--muted);">Louis Buitton brings together heritage tailoring, soft palette textures, and elevated basics for those who value subtle distinction. Each garment is represented with a model photograph to showcase how the silhouette moves, drapes, and feels when worn with confidence.</p>
+
+    <footer>
+      <span>© 2026 Louis Buitton</span>
+      <span>Crafted for modern collectors of classic style.</span>
+    </footer>
+  </main>
+
+  <script>
+    const products = [
+      {
+        id: 0,
+        name: "Ivory Tailored Jacket",
+        price: 275,
+        image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id: 1,
+        name: "Estate Cashmere Sweater",
+        price: 320,
+        image: "https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id: 2,
+        name: "Regal Overcoat",
+        price: 540,
+        image: "https://images.unsplash.com/photo-1495121605193-b116b5b9c5d6?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id: 3,
+        name: "Gallery Trousers",
+        price: 260,
+        image: "https://images.unsplash.com/photo-1520975919013-5295a7ce10a5?auto=format&fit=crop&w=1200&q=80"
+      }
+    ];
+
+    const cart = [];
+    const cartItemsEl = document.getElementById('cartItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    const checkoutButton = document.getElementById('checkoutButton');
+
+    function scrollToCollection() {
+      document.getElementById('collection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function addToCart(productId) {
+      const product = products.find(item => item.id === productId);
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      updateCart();
+    }
+
+    function removeFromCart(productId) {
+      const index = cart.findIndex(item => item.id === productId);
+      if (index !== -1) {
+        cart.splice(index, 1);
+      }
+      updateCart();
+    }
+
+    function changeQuantity(productId, delta) {
+      const item = cart.find(entry => entry.id === productId);
+      if (!item) return;
+      item.quantity = Math.max(1, item.quantity + delta);
+      updateCart();
+    }
+
+    function updateCart() {
+      cartItemsEl.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = '<p style="color: var(--muted);">Your cart is currently empty.</p>';
+        subtotalEl.textContent = '$0';
+        totalEl.textContent = '$25';
+        checkoutButton.disabled = true;
+        return;
+      }
+
+      let subtotal = 0;
+      cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <p>$${item.price} x ${item.quantity}</p>
+            <div class="cart-item-controls">
+              <div class="quantity">
+                <button onclick="changeQuantity(${item.id}, -1)" style="border:none;background:none;cursor:pointer;">–</button>
+                ${item.quantity}
+                <button onclick="changeQuantity(${item.id}, 1)" style="border:none;background:none;cursor:pointer;">+</button>
+              </div>
+              <button class="remove" onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
+          </div>
+        `;
+        cartItemsEl.appendChild(cartItem);
+      });
+
+      const shipping = 25;
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      totalEl.textContent = `$${(subtotal + shipping).toFixed(2)}`;
+      checkoutButton.disabled = false;
+    }
+
+    function checkout() {
+      if (cart.length === 0) return;
+      const shipping = 25;
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const total = subtotal + shipping;
+      const names = cart.map(item => `${item.quantity}× ${item.name}`).join('\n');
+      const message = `Order confirmed:\n\n${names}\n\nSubtotal: $${subtotal.toFixed(2)}\nShipping: $${shipping.toFixed(2)}\nTotal: $${total.toFixed(2)}\n\nThank you for choosing Louis Buitton.`;
+      alert(message);
+      cart.length = 0;
+      updateCart();
+    }
+  </script>
+</body>
+</html>
